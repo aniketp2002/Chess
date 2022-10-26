@@ -5,11 +5,14 @@ const Landing = () => {
   return (
     <>
         <div className="contnr">
+        {/* <img src={landingimg} className="bdy"/> */}
         <div className="head">
-            <div className="heading">Chess</div>
-            <div className="btngrp">
-              <button type="button" class="btn btn-light">Light</button>
-              <button type="button" class="btn btn-light">Light</button>
+            <div className="heading">ChessMaster</div>
+            <div className="subheading">SAY <span className='fcColor'>"YES!"</span>  NEW <span className='fcColor'>VICTORIES</span> <br />AND INCREASED <span className='fcColor'>THINKING!</span></div>
+            <br />
+            <div className="">
+              <button type="button" class="btn1">Online</button>
+              <button type="button" class="btn1  mx-3 ">Offline</button>
             </div>
         </div>
         <img src={landingimg} className="bdy"/>

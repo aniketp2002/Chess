@@ -28,9 +28,20 @@ body{
     padding: 4vw;
 }
 .heading {
-    font-size: 140px;
+    font-size: 6rem;
     color: white;
     margin-top: 3vh;
+    font-family: 'Passion One', cursive;
+    text-transform: uppercase;
+}
+.subheading{
+    margin-left: 3rem;
+    font-size: 2rem;
+    color: white;
+    /* margin-top: 3vh; */
+    font-family: 'Passion One', cursive;
+    text-transform: uppercase;
+    
 }
 .btngrp {
     margin-top: 25vh;
@@ -39,7 +50,18 @@ body{
     display: flex;
     justify-content: space-between;
 }
-button{
-    width: 4vw;
-    height: 4vh;
+.fcColor{
+    
+    color: #fc3434;
+}
+.btn1{
+    background-color: #fc3434;
+    margin-left: 3rem;
+    color: #fff;
+    padding: 0.8rem 3.7rem;
+    /* width: 4vw; */
+    text-transform: uppercase;
+    outline: none;
+    border: none;
+    /* height: 4vh; */
 }
