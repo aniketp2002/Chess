@@ -1,5 +1,25 @@
 {
     "marquee.widgets.npm-stats.packageNames": [
         "chess"
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#fd6666",
+        "activityBar.background": "#fd6666",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#03fc03",
+        "activityBarBadge.foreground": "#15202b",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#fd6666",
+        "statusBar.background": "#fc3434",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#fd6666",
+        "statusBarItem.remoteBackground": "#fc3434",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#fc3434",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#fc343499",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#fc3434"
 }
