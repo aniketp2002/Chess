@@ -1,37 +1,7 @@
-import { startTransition, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../App.css";
-import io from 'socket.io-client';
-
+import { getPosition, setPosition } from "./Helper";
 function Online() {
-
-    const socket = io();
-    // const socket = io('http://localhost:5000');
-    const [isConnected, setIsConnected] = useState(socket.connected);
-    const [lastPong, setLastPong] = useState(null);
-    useEffect(() => {
-        socket.on('connect', () => {
-            console.log("connect")
-            setIsConnected(true);
-        });
-
-        socket.on('disconnect', () => {
-            setIsConnected(false);
-        });
-
-        socket.on('pong', () => {
-            setLastPong(new Date().toISOString());
-        });
-
-        return () => {
-            socket.off('connect');
-            socket.off('disconnect');
-            socket.off('pong');
-        };
-    }, []);
-
-    const sendPing = () => {
-        socket.emit('ping');
-    }
 
     let apf = ["a", "b", "c", "d", "e", "f", "g", "h"];
     let chess = [];
@@ -435,7 +405,12 @@ function Online() {
         let checkb = checkrun(temp, b_king_pos);
         checkw.length !== 0 && alert(`check by black team to white by ${checkw.map((e, i) => { return e + " "; })}`);
         checkb.length !== 0 && alert(`check by white team to black by ${checkb.map((e, i) => { return e + " "; })}`);
+        setPosition(position);
     }
+    
+    useEffect(()=>{
+        getPosition(setPosition);
+    },[position])
 
     return (
         <div className="App">
@@ -464,11 +439,6 @@ function Online() {
 
                     })}
             </div>
-                <div>
-                    <p>Connected: {'' + isConnected}</p>
-                    <p>Last pong: {lastPong || '-'}</p>
-                    <button onClick={sendPing}>Send ping</button>
-                </div>
         </div>
     );
 }

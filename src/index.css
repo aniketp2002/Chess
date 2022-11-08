@@ -94,3 +94,18 @@ body{
  .board-item .moves_red::after{
   background-color: red;
  }
+
+ .btn-close {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background-color: #fc3434;
+  border-radius: 23px;
+  width: 25px;
+  opacity: 0.9;
+  height: 25px;
+ }
+
+ .text-fc3434{
+  color: #fc3434;
+ }
