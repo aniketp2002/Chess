@@ -1,0 +1,296 @@
+#include<bits/stdc++.h>
+using namespace std;
+void bfs_rec(vector<int>vec[],vector<int> &visit, queue<int> & q,vector<int> & ans)
+{
+    if(q.empty())
+    {
+        return ;
+    }
+    int ele=q.front();
+    q.pop();
+    ans.push_back(ele);
+    vector<int>a=vec[ele];
+    for(int i=0;i<a.size();i++)
+    {
+        if(!visit[a[i]])
+        {
+            visit[a[i]]=1;
+            cout<<"Visiting "<<a[i]<<" Vertex and inserting it into queue\n";
+            q.push(a[i]);
+        }
+    }
+    bfs_rec(vec,visit,q,ans);
+}
+void BFS(vector<int>vec[],int n)
+{
+    vector<int>visit(n+1,0);
+    queue<int>q;
+    vector<int>ans;
+    for(int i=1;i<=n;i++)
+    {
+        if(visit[i]==0)
+        {
+
+            visit[i]=1;
+            cout<<"Visiting "<<i<<" Vertex and inserting it into stack\n";
+            q.push(i);
+             bfs_rec(vec,visit,q,ans);
+        }
+    }
+    cout<<"\nBFS Traversal is : ";
+    for(int i=0;i<ans.size();i++)
+    {
+        cout<<ans[i]<<" ";
+    }
+    cout<<"\n";
+
+}
+
+
+void dfs_rec(vector<int>vec[],vector<int> &visit,stack<int>st,vector<int> &ans)
+{
+    int n=st.top();
+    st.pop();
+     vector<int>a=vec[n];
+     ans.push_back(n);
+    // cout<<n<<" ";
+     for(int i=0;i<a.size();i++)
+     {
+         int ele=a[i];
+         if(visit[a[i]]==0)
+         {
+             visit[a[i]]=1;
+             cout<<"Visiting "<<a[i]<<" Vertex and inserting it into stack\n";
+            st.push(a[i]);
+             dfs_rec(vec,visit,st,ans);
+         }
+     }
+}
+
+void DFS(vector<int>vec[],int n)
+{
+    vector<int>ans;
+    vector<int>visit(n+1,0);
+    stack<int>st;
+    for(int i=1;i<=n;i++)
+    {
+        if(visit[i]==0)
+        {
+            visit[i]=1;
+            cout<<"Visiting "<<i<<" Vertex and inserting it into stack\n";
+            st.push(i);
+            dfs_rec(vec,visit,st,ans);
+        }
+    }
+
+     cout<<"\nDFS Traversal is : ";
+    for(int i=0;i<ans.size();i++)
+    {
+        cout<<ans[i]<<" ";
+    }
+    cout<<"\n";
+
+
+}
+
+int main()
+{
+    int n,edge,u,v;
+    cout<<"Enter Number of Vertices : ";
+    cin>>n;
+    vector<int>vec[n+1];
+    cout<<"Enter Number of Edges : ";
+    cin>>edge;
+    for(int i=0;i<edge;i++)
+    {
+        cout<<"Enter source index : ";
+        cin>>u;
+        cout<<"Enter destination vertex : ";
+        cin>>v;
+        vec[u].push_back(v);
+        vec[v].push_back(u);
+    }
+
+    cout<<"\nGraph\n";
+
+    for(int i=1;i<n+1;i++)
+    {
+        cout<<i<<" -> ";
+        vector<int>a=vec[i];
+        for(int j=0;j<vec[i].size();j++)
+         {
+             cout<<a[j]<<" ";
+         }
+        cout<<"\n";
+    }
+
+    cout<<"\n\nBFS Treversal \n\n";
+    BFS(vec,n);
+
+    cout<<"\n\nDFS Treversal \n\n";
+    DFS(vec,n);
+
+}
+--------------------------------------------------------------
+
+2-----------------------------------
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+int n;
+vector<int> v;
+cout<<"Enter number of elements: ";
+cin>>n;
+cout<<"\nEnter values: ";
+for(int i=0;i<n;i++){
+int x;
+cout<<"\nElement "<<i+1<<": ";
+cin>>x;
+v.push_back(x);
+}
+int z;
+cout<<"\nThe array you entered is: ";
+for(int i=0;i<n;i++){
+cout<<v[i]<<" ";
+}
+cout<<"\n\nPerforming Selection Sort on the given array\n";
+for(int i=0;i<n;i++){
+z=i;
+for(int j=i+1;j<n;j++){
+if(v[j]<v[z]){
+z=j;
+}
+}
+int t=v[z];
+v[z]=v[i];
+v[i]=t;
+}
+cout<<"\nThe sorted array is: ";
+for(int i=0;i<n;i++){
+cout<<v[i]<<" ";
+}
+return 1;
+}
+--------------------------------------------------------------------------------------------
+4---------------------nqueen
+
+#include<bits/stdc++.h>
+
+using namespace std;
+bool checkSafety(vector < vector < int >> & b, int r, int n, int c) {
+  // traversing the row where the current queen is to be placed to
+  check
+  for conflicting queen
+  for (int i = 0; i < c; i++) {
+    if (b[r][i] == 1) {
+      return false;
+    }
+  }
+  int r1 = r, c1 = c;
+  // traversing top left diagonal
+  while (r1 != -1 && c1 != -1) {
+    if (b[r1][c1] == 1) {
+      return false;
+    }
+    --r1;
+    --c1;
+  }
+  // traversing bottom left diagonal
+  r1 = r;
+  c1 = c;
+  while (r1 < n && c1 != -1) {
+    if (b[r1][c1] == 1) {
+      return false;
+    }
+    ++r1;
+    --c1;
+  }
+  return true; // no conflicting queen present
+}
+bool NQueens(vector < vector < int >> & b, int c, int n) {
+  if (c == n) {
+    return true;
+  }
+  for (int i = 0; i < n; i++) {
+    if (checkSafety(b, i, n, c)) {
+      b[i][c] = 1;
+      if (NQueens(b, c + 1, n)) {
+        return true;
+      }
+      b[i][c] = 0;
+    }
+  }
+  return false;
+}
+int main() {
+  int n;
+  while (true) {
+    cout << "\nEnter number of queens: ";
+    cin >> n;
+    if (n == -1) {
+      cout << "\nThank You.... ";
+      return 1;
+    }
+    vector < vector < int >> b;
+    for (int i = 0; i < n; i++) {
+      vector < int > x;
+      for (int j = 0; j < n; j++) {
+        x.push_back(0);
+      }
+      b.push_back(x);
+    }
+    if (NQueens(b, 0, n)) {
+      cout << "\n";
+      for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+          if (b[i][j] == 1) {
+            cout << "Q ";
+          } else {
+            cout << ". ";
+          }
+        }
+        cout << "\n";
+      }
+    } else {
+      cout << "\nSolution not possible\n";
+    }
+    cout << "\nEnter -1 to exit...\n";
+  }
+  return 0;
+}
+------------------------------------------------------------------------------------------
+chatbot-----------------------------------------------------------------------
+#include <iostream>
+#include <map>
+#include <string>
+
+int main() {
+    std::map<std::string, std::string> responses;
+    responses["Hi"] = "Hello! How can I assist you with sim card data packs?";
+    responses["Recharge plans"] = "Here are some popular recharge plans:\nRs. 299 - Unlimited Calls + 1.5GB/day for 28 days\nRs. 719 - Unlimited Calls + 1.5GB/day for 84 days\nRs. 399 - Unlimited Calls + 2.5GB/day for 28 days\nRs. 499 - Unlimited Calls + 3GB/day for 28 days";
+    responses["Data plans"] = "These are some popular data plans:\nRs. 151 - 8GB for 30 days\nRs. 108 - 6GB for 15 days\nRs. 58 - 3GB for 28 days\nRs. 39 - 3GB for 7 days\nRs. 75 - 6GB for 7 days";
+    responses["Validity plans"] = "Here are some popular validity plans:\nRs. 99 - Rs. 99 talktime + 200MB for 28 days\nRs. 279 - Rs. 279 talktime + 500MB for 90 days\nRs. 107 - Rs. 107 talktime + 200MB for 30 days\nRs. 111 - Rs. 111 talktime + 200MB for 28 days";
+    responses["Yearly plans"] = "These are some popular yearly plans:\nRs. 3099 - Unlimited Calls + 2GB/day for 365 days\nRs. 2999 - Unlimited Calls + 850GB for 365 days\nRs. 2899 - Unlimited Calls + 1.5GB/day for 365 days\nRs. 1799 - Unlimited Calls + 24GB for 365 days";
+
+    std::cout << "ChatBot: Hello! How can I assist you with sim card data packs?\n";
+
+    while (true) {
+        std::string input;
+        std::cout << "You: ";
+        std::getline(std::cin, input);
+
+        if (input == "quit" || input == "Quit" || input == "exit") {
+            std::cout << "ChatBot: Thank you! Goodbye!\n";
+            break;
+        }
+
+        if (responses.find(input) != responses.end()) {
+            std::cout << "ChatBot: " << responses[input] << "\n";
+        } else {
+            std::cout << "ChatBot: I'm sorry, I don't have information about that. Can I assist you with something else?\n";
+        }
+    }
+
+    return 0;
+}
+----------------------------------------------------------------------s
